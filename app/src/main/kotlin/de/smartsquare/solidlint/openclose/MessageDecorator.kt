@@ -4,63 +4,25 @@ package de.smartsquare.solidlint.openclose
  * OCP is violated as indicated by too many functions.
  * Other indicators include cyclic complexity or large class.
  */
-@Suppress("TooManyFunctions")
 class MessageDecorator {
 
     fun decorate(msg: String, decorationType: Type): String {
-        return when (decorationType) {
-            Type.YELL -> yell(msg)
-            Type.WHISPER -> whisper(msg)
-            Type.CAMEL -> camel(msg)
-            Type.LEET -> leet(msg)
-            Type.GREEN -> green(msg)
-            Type.RED -> red(msg)
-            Type.YELLOW -> yellow(msg)
-            Type.BLUE -> blue(msg)
-            Type.BLACK -> black(msg)
-            Type.WHITE -> white(msg)
-        }
+        val decorator = checkNotNull(decorators[decorationType])
+        return decorator(msg)
     }
 
-    private fun yell(msg: String): String {
-        return msg.uppercase()
-    }
-
-    private fun whisper(msg: String): String {
-        return msg.lowercase()
-    }
-
-    private fun camel(msg: String): String {
-        return msg.capitalize()
-    }
-
-    private fun leet(msg: String): String {
-        return msg
-    }
-
-    private fun green(msg: String): String {
-        return msg
-    }
-
-    private fun red(msg: String): String {
-        return msg
-    }
-
-    private fun yellow(msg: String): String {
-        return msg
-    }
-
-    private fun blue(msg: String): String {
-        return msg
-    }
-
-    private fun black(msg: String): String {
-        return msg
-    }
-
-    private fun white(msg: String): String {
-        return msg
-    }
+    val decorators = mapOf(
+        Type.YELL to { msg: String -> msg.uppercase() },
+        Type.WHISPER to { msg: String -> msg.lowercase() },
+        Type.CAMEL to { msg: String -> msg.capitalize() },
+        Type.LEET to { msg: String -> msg },
+        Type.GREEN to { msg: String -> msg },
+        Type.RED to { msg: String -> msg },
+        Type.YELLOW to { msg: String -> msg },
+        Type.BLUE to { msg: String -> msg },
+        Type.BLACK to { msg: String -> msg },
+        Type.WHITE to { msg: String -> msg }
+    )
 
     enum class Type {
         YELL, WHISPER, CAMEL, LEET, GREEN, RED, YELLOW, BLUE, BLACK, WHITE
