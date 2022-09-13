@@ -20,12 +20,14 @@ internal class DipUserNotificationTest {
     fun setUp() {
         userNotification = DipUserNotification(
             SecurityContext(),
-            EmailNotifier(),
-            PushNotifier(),
-            SlackNotifier(),
-            WhatsAppNotifier(),
-            SmsNotifier(),
-            SignalNotifier()
+            listOf(
+                EmailNotifier(),
+                PushNotifier(),
+                SlackNotifier(),
+                WhatsAppNotifier(),
+                SmsNotifier(),
+                SignalNotifier()
+            )
         )
         System.setOut(PrintStream(outputStream))
     }

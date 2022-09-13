@@ -1,9 +1,12 @@
 package de.smartsquare.solidlint.dependencyinversion
 
 import de.smartsquare.solidlint.Event
+import de.smartsquare.solidlint.UserSettings
 
-class SmsNotifier {
-    fun sendSms(event: Event) {
-        println("SMS: $event")
+class SmsNotifier : Notifier {
+    override fun sendNotification(userSettings: UserSettings, event: Event) {
+        if (userSettings.smsActive) {
+            println("SMS: $event")
+        }
     }
 }
