@@ -17,9 +17,15 @@ class SrUserNotificationTest {
 
     @Before
     fun setUp() {
+        val notificationSettings = NotificationSettings()
         userNotification = SrUserNotification(
             SecurityContext(),
-            NotificationSettings()
+            EmailNotifier(notificationSettings),
+            PushNotifier(notificationSettings),
+            SlackNotifier(notificationSettings),
+            SmsNotifier(notificationSettings),
+            WhatsAppNotifier(notificationSettings),
+            SignalNotifier(notificationSettings)
         )
         System.setOut(PrintStream(outputStream))
     }
